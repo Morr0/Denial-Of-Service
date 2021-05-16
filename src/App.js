@@ -8,6 +8,7 @@ function App() {
 	const [count, setCount] = useState(0);
 	const [target, setTarget] = useState("");
 	const [attacking, setAttacking] = useState(false);
+	const [httpError, setHttpError] = useState(false);
 
 	const addFunc = (statusCode) => {
 		setAttacks((old) => {
@@ -47,11 +48,16 @@ function App() {
 		fetch(target)
 		.then((res) => {
 			setAttacking(true);
+			setHttpError(false);
+
 			add(res.status.toString());
 			console.log("Successfully hit first time, starting bombardment");
 		})
 		.catch((e) => {
-			console.log(e)
+			if (e instanceof TypeError){
+				setHttpError(true);
+			}
+
 			setAttacking(false);
 			console.log("Unsuccessfully hit the first endpoint, abolishing procedure");
 		});
@@ -61,7 +67,7 @@ function App() {
 		<div className="App">
 			<Initiator attack={attack} setTarget={setTarget} attacking={attacking} setAttacking={setAttacking} />
 			<hr/>
-			<Responses target={target} requests={count} responsePairs={Array.from(attacks)} />
+			<Responses target={target} requests={count} responsePairs={Array.from(attacks)} httpError={httpError} />
 		</div>
 	);
 }

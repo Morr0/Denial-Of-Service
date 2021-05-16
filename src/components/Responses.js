@@ -1,4 +1,6 @@
-const Responses = ({target, requests, responsePairs}) => {
+const Responses = ({target, requests, responsePairs, httpError}) => {
+    if (httpError) return <h2>The endpoint above was either blocked by CORS or non-existent</h2>;
+
     if (responsePairs.length === 0) return null;
 
     return (
