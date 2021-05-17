@@ -1,6 +1,11 @@
-const Initiator = ({attack, attacking, setAttacking, setTarget}) => {
+const Initiator = ({attack, attacking, setAttacking, target, setTarget}) => {
     const submit = (e) => {
         e.preventDefault();
+
+        if (!target.includes("http://") && !target.includes("https://")){
+            alert("Please provide a valid endpoint");
+            return;
+        }
 
         attack();
     };

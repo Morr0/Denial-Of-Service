@@ -65,7 +65,7 @@ function App() {
 
 	return (
 		<div className="App">
-			<Initiator attack={attack} setTarget={setTarget} attacking={attacking} setAttacking={setAttacking} />
+			<Initiator attack={attack} target={target} setTarget={setTarget} attacking={attacking} setAttacking={setAttacking} />
 			<hr/>
 			<Responses target={target} requests={count} responsePairs={Array.from(attacks)} httpError={httpError} />
 		</div>
